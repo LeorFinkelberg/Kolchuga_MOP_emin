@@ -1,16 +1,16 @@
+import argparse
+import logging
 import math
 import sys
+from collections import namedtuple
+from typing import Dict, NoReturn, Tuple
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import pathlib2
 import yaml
-import argparse
 from pathlib2 import Path
-from typing import Tuple, NoReturn, Dict
-from collections import namedtuple
-import logging
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 
 
 class DataFilepathNotExists(Exception):
@@ -76,7 +76,7 @@ def read_config(config_filename: str) -> Dict:
         logging.error(f"{err}")
         sys.exit()
     else:
-        with open(config_path, "r") as f:
+        with open(config_path) as f:
             config = yaml.safe_load(f)
             logging.info(f"Конфигурационный файл `{config_filename}` успешно прочитан!")
         return config
@@ -87,7 +87,7 @@ def read_data(data_filepath: pathlib2.WindowsPath) -> pd.DataFrame:
     Читает csv-файл. Эти данные используется для вычисления стоимости
     ЗСП Кольчуга
     """
-    with open(data_filepath, "r") as f:
+    with open(data_filepath) as f:
         data = pd.read_csv(f, delimiter=";")
     return data
 
