@@ -18,7 +18,7 @@ settings_for_figures:
   y_step_left: 0.125
   y_uplim_right: 8000
   y_step_right: 500
-
+  
 input_data_for_compute:
   MOP_normative: 1.00
   e_SDR: 0.0148

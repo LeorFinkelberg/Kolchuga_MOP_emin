@@ -5,17 +5,19 @@
 #### Структура проекта
 
 ```sh
-project
-  -- python_scripts
+project/
+  -- python_scripts/
     -- summary_PEpipe_Kolchuga.py
   README.md
-  config_SDR9.yaml
-  config_SDR11.yaml
-  config_SDR17.yaml
+  -- configs/
+    -- config_SDR9.yaml
+    -- config_SDR11.yaml
+    -- config_SDR17.yaml
 ```
 
-#### Использование
+#### Пример использования
 ```sh
-$ cd python_scripts
-$ python summary_PEpipe_Kolchuga.py --config-path config_SDR9.yaml
+# в корне проекта
+$ python python_scripts\summary_PEpipe_Kolchuga.py /
+    --config-path configs\config_SDR9.yaml
 ```

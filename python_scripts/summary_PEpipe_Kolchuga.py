@@ -1,3 +1,4 @@
+import os
 import argparse
 import logging
 import math
@@ -24,6 +25,12 @@ class ConfigPathNotExists(Exception):
     Возбуждает исключение, если конфигурационный файл не найден
     """
 
+class UnknownSeparatorInPath(Exception):
+    """
+    Возбуждает исключение, если в пути встречается
+    неизвестный разделитель
+    """
+
 
 file_log = logging.FileHandler("logs.log")
 console_out = logging.StreamHandler(sys.stdout)
@@ -35,17 +42,37 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
+def fixing_path(path: str) -> str:
+    """
+    Приводит путь, состоящий из нескольких узлов к
+    формату текущей операционной системы
+    """
+    path_pattern_with_correct_sep = (
+        lambda lst_files: f"{os.sep}".join(lst_files)
+    )
+    try:
+        if "\\" in path:
+            parts = path.split("\\")
+        elif "/" in path:
+            parts = path.split("/")
+        else:
+            raise UnknownSeparatorInPath("Ошибка! Неизвестный разделитель")
+    except UnknownSeparatorInPath as err:
+            logging.error(f"{err}")
+            sys.exit()
+        
+    fixed_path = path_pattern_with_correct_sep(parts)
+    return fixed_path
 
 def preprocessing_paths(
     params: namedtuple,
-) -> Tuple[pathlib2.WindowsPath, pathlib2.WindowsPath]:
+) -> Tuple[Path, Path]:
     """
     Формирует пути
     """
     from_project_dir_figures_dir_path = PROJECT_DIR.joinpath(
         Path(params.FIGURES_DIRNAME)
     )
-
     data_filepath = PROJECT_DIR.joinpath(Path(params.DATA_FILENAME))
     try:
         if not data_filepath.exists():
@@ -360,7 +387,9 @@ def init_param(config: Dict) -> namedtuple:
         ),
     )
     # имена файлов и директорий
-    Params.DATA_FILENAME = config["file_dir_names"]["data_filename"]
+    Params.DATA_FILENAME = fixing_path(
+            config["file_dir_names"]["data_filename"]
+    )
     Params.OUTPUT_FIG_FILENAME = config["file_dir_names"]["output_fig_filename"]
     Params.FIGURES_DIRNAME = config["file_dir_names"]["figures_dirname"]
 
@@ -457,8 +486,7 @@ if __name__ == "__main__":
     parser.add_argument("--config-path", type=str)
     args = parser.parse_args()
 
-    CURRENT_DIR = Path().cwd()
-    PROJECT_DIR = CURRENT_DIR.parent
+    PROJECT_DIR = Path().cwd()
     CONFIG_FILENAME = args.config_path
 
     config = read_config(CONFIG_FILENAME)
