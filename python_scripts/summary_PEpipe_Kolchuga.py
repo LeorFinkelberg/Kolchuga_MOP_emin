@@ -46,23 +46,6 @@ logging.basicConfig(
 )
 
 
-def fixing_path(path: str) -> str:
-    """
-    Приводит путь, состоящий из нескольких узлов к
-    формату текущей операционной системы
-    """
-    path_pattern_with_correct_sep = lambda lst_files: f"{os.sep}".join(lst_files)
-    if "\\" in path:
-        parts = path.split("\\")
-    elif "/" in path:
-        parts = path.split("/")
-    else:
-        parts = [path]
-
-    fixed_path = path_pattern_with_correct_sep(parts)
-    return fixed_path
-
-
 def preprocessing_paths(
     params: namedtuple,
 ) -> Tuple[PathWinOrLinux, PathWinOrLinux]:
@@ -85,7 +68,7 @@ def preprocessing_paths(
         if not from_project_dir_figures_dir_path.exists():
             Path.mkdir(from_project_dir_figures_dir_path)
         output_fig_filepath = PROJECT_DIR.joinpath(
-            Path(from_project_dir_figures_dir_path),
+            from_project_dir_figures_dir_path,
             Path(params.OUTPUT_FIG_FILENAME),
         )
         return data_filepath, output_fig_filepath
@@ -96,7 +79,7 @@ def read_config(config_filename: str) -> Dict:
     try:
         if not config_path.exists():
             raise ConfigPathNotExists(
-                f"Ошибка! Конфигурационный файл `{config_path.name}` не существует!"
+                f"Ошибка! Конфигурационный файл `{config_path.name}` не найден!"
             )
     except ConfigPathNotExists as err:
         logging.error(f"{err}")
@@ -386,7 +369,7 @@ def init_param(config: Dict) -> namedtuple:
         ),
     )
     # имена файлов и директорий
-    Params.DATA_FILENAME = fixing_path(config["file_dir_names"]["data_filename"])
+    Params.DATA_FILENAME = config["file_dir_names"]["data_filename"]
     Params.OUTPUT_FIG_FILENAME = config["file_dir_names"]["output_fig_filename"]
     Params.FIGURES_DIRNAME = config["file_dir_names"]["figures_dirname"]
 
@@ -457,7 +440,7 @@ def init_param(config: Dict) -> namedtuple:
 def plot_all(
     data: pd.DataFrame,
     params: namedtuple,
-    output_fig_filepath: pathlib2.WindowsPath,
+    output_fig_filepath: PathWinOrLinux,
 ) -> NoReturn:
     """
     Строит все графические элементы
