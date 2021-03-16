@@ -1,5 +1,5 @@
 file_dir_names:
-  data_filename: "cost_ribbon_Kolchuga.csv"
+  data_filename: "data/cost_ribbon_Kolchuga.csv"
   output_fig_filename: "MOP_emin_dn225.pdf"
   figures_dirname: "figures"
 
@@ -13,12 +13,12 @@ settings_for_figures:
   margin_left: 0.0002
   margin_right: 0.0002
   text_offset_x: 0.9
-  text_offset_y: 0.95
+  text_offset_y: 1.02
   y_uplim_left: 2.7
   y_step_left: 0.25
   y_uplim_right: 6750
   y_step_right: 500
-  
+
 input_data_for_compute:
   MOP_normative: 2.00
   e_SDR: 0.0252

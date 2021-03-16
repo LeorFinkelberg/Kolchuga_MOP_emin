@@ -1,5 +1,5 @@
 file_dir_names:
-  data_filename: "cost_ribbon_Kolchuga.csv"
+  data_filename: "data/cost_ribbon_Kolchuga.csv"
   output_fig_filename: "MOP_emin_dn315.pdf"
   figures_dirname: "figures"
 
@@ -18,7 +18,7 @@ settings_for_figures:
   y_step_left: 0.25
   y_uplim_right: 12500
   y_step_right: 500
-  
+
 input_data_for_compute:
   MOP_normative: 2.00
   e_SDR: 0.0352
