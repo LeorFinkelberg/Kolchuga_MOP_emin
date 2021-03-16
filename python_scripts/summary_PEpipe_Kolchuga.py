@@ -305,7 +305,9 @@ def plot_main_graph(ax) -> NoReturn:
     ax.set_ylabel(
         "MOP: максимальное рабочее\nдавление, [МПа]", color=params.BLACK_COLOR
     )
-    ax.set_yticks(np.arange(0.0, 3.25, 0.25))
+    ax.set_yticks(
+        np.arange(0.0, params.Y_UPLIM_LEFT + params.Y_STEP_LEFT, params.Y_STEP_LEFT)
+    )
     ax.legend(title="MOP - $e_{min}$", loc=2)
 
 
