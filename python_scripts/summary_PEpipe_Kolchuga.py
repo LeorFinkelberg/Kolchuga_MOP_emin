@@ -1,7 +1,6 @@
 import argparse
 import logging
 import math
-import os
 import sys
 from collections import namedtuple
 from typing import Dict, NoReturn, Tuple, Union
@@ -9,7 +8,6 @@ from typing import Dict, NoReturn, Tuple, Union
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import pathlib2
 import yaml
 from pathlib2 import Path, PosixPath, WindowsPath
 
