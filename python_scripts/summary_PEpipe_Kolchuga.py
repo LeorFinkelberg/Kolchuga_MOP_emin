@@ -147,13 +147,13 @@ def plot_MOP_emin(ax) -> NoReturn:
     ax.plot(
         e_range,
         MOP_k_2mm_down_range,
-        label="ПЭ труба + ЗСП 'Кольчуга' (2 мм)",
+        label="ПЭ труба + ЗСП 'Кольчуга' (2 слоя)",
         color=params.KOLCHUGA_2MM_COLOR,
     )
     ax.plot(
         e_range,
         MOP_k_4mm_down_range,
-        label="ПЭ труба + ЗСП 'Кольчуга' (4 мм)",
+        label="ПЭ труба + ЗСП 'Кольчуга' (4 слоя)",
         color=params.KOLCHUGA_4MM_COLOR,
     )
 
@@ -208,7 +208,7 @@ def plot_cost_emin(ax, data: pd.DataFrame) -> NoReturn:
         cost_PE_Kolchuga_2_mm_range_material,
         dashes=dashes,
         ls="--",
-        label="Стоимость ПЭ + сырье ЗСП 'Кольчуга' (2 мм)",
+        label="Стоимость ПЭ + сырье ЗСП 'Кольчуга' (2 слоя)",
         color=params.KOLCHUGA_2MM_COLOR,
     )
 
@@ -217,7 +217,7 @@ def plot_cost_emin(ax, data: pd.DataFrame) -> NoReturn:
         cost_PE_Kolchuga_4_mm_range_material,
         dashes=dashes,
         ls="--",
-        label="Стоимость ПЭ + сырье ЗСП 'Кольчуга' (4 мм)",
+        label="Стоимость ПЭ + сырье ЗСП 'Кольчуга' (4 слоя)",
         color=params.KOLCHUGA_4MM_COLOR,
     )
 
@@ -225,7 +225,7 @@ def plot_cost_emin(ax, data: pd.DataFrame) -> NoReturn:
         e_range,
         cost_PE_Kolchuga_2_mm_range_total,
         ls="-.",
-        label="Стоимость ПЭ + продукт ЗСП 'Кольчуга' (2 мм)",
+        label="Стоимость ПЭ + продукт ЗСП 'Кольчуга' (2 слоя)",
         color=params.KOLCHUGA_2MM_COLOR,
     )
 
@@ -233,7 +233,7 @@ def plot_cost_emin(ax, data: pd.DataFrame) -> NoReturn:
         e_range,
         cost_PE_Kolchuga_4_mm_range_total,
         ls="-.",
-        label="Стоимость ПЭ + продукт ЗСП 'Кольчуга' (4 мм)",
+        label="Стоимость ПЭ + продукт ЗСП 'Кольчуга' (4 слоя)",
         color=params.KOLCHUGA_4MM_COLOR,
     )
 
@@ -417,10 +417,10 @@ def init_param(config: Dict) -> namedtuple:
     ]  # верхняя граница коэффициента запаса прочности
     Params.k_2mm = config["input_data_for_compute"][
         "k_2mm"
-    ]  # коэффициент усилиния для ПЭ трубы с ЗСП Кольчуга (2 мм)
+    ]  # коэффициент усилиния для ПЭ трубы с ЗСП Кольчуга (2 слоя)
     Params.k_4mm = config["input_data_for_compute"][
         "k_4mm"
-    ]  # коэффициент усилиния для ПЭ трубы с ЗСП Кольчуга (4 мм)
+    ]  # коэффициент усилиния для ПЭ трубы с ЗСП Кольчуга (4 слоя)
     Params.xvalue_SDR = config["input_data_for_compute"]["xvalue_SDR"]
     Params.xlabel_SDR = config["input_data_for_compute"]["xlabel_SDR"]
 

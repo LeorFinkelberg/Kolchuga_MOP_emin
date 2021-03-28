@@ -16,7 +16,7 @@ settings_for_figures:
   text_offset_y: 1.02
   y_uplim_left: 2.7
   y_step_left: 0.25
-  y_uplim_right: 12500
+  y_uplim_right: 12300
   y_step_right: 500
 
 input_data_for_compute:

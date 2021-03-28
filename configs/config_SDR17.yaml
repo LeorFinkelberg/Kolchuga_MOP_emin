@@ -1,5 +1,5 @@
 file_dir_names:
-  data_filename: "cost_ribbon_Kolchuga.csv"
+  data_filename: "data/cost_ribbon_Kolchuga.csv"
   output_fig_filename: "MOP_emin_SDR17.pdf"
   figures_dirname: "figures"
 
